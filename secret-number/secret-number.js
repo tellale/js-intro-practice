@@ -20,40 +20,57 @@ const rl = readline.createInterface({
 
 // productor
 function getNumberFromConsole() {
-  const promise = new Promise((resolve, reject) => {
-    // nos permite hacer una pregunta por consola al usuario. Ojo que es un proceso asíncrono.
-    rl.question('Introduce el número: ', (num) => {
-        rl.pause();
-        // si el usuario mete un número, resolvemos la promesa con ese número.
-        resolve(num)
-        // si el usuario mete una letra, debemos rechazar/rejectear la promesa.
+    const promise = new Promise((resolve, reject) => {
+      // nos permite hacer una pregunta por consola al usuario. Ojo que es un proceso asíncrono.
+      rl.question('Introduce el número: ', (num) => {
+          rl.pause();
+          if(isNaN(num)){
+            reject(new Error('Introduce nums'))
+          } else {
+            resolve(num)
+          }
+          // si el usuario mete un número, resolvemos la promesa con ese número.
+          
+          // si el usuario mete una letra, debemos rechazar/rejectear la promesa.
+      })
     })
-  })
-
-  return promise;
-}
+  
+    return promise;
+  }
 
 // consumidor
-let numberFromConsole = await getNumberFromConsole()
+async function userNumber(){
+  try{
+    let number = await getNumberFromConsole()
+    return number
+  }
+  catch(error){
+    console.log(error)
+  }
+}
 
 
-console.log(numberFromConsole)
 
+//console.log(numberFromConsole)
 
 // Comprobar si el número es el número secreto:
 // Si lo es, tenemos ganador!
 // Si no lo es, damos la pista
+let numberFromConsole = await userNumber()
+
 while (numberFromConsole !== secretNumber){
     if (numberFromConsole > secretNumber){
         console.log('Prueba con un numero mas pequenio')
-        numberFromConsole = await getNumberFromConsole()
-        console.log(numberFromConsole)
+        numberFromConsole = await userNumber()
+        //console.log(numberFromConsole)
     } else if (numberFromConsole < secretNumber){
         console.log('Prueba con un numero mas grande')
-        numberFromConsole = await getNumberFromConsole()
-        console.log(numberFromConsole)
-    } else {
+        numberFromConsole = await userNumber()
+        //console.log(numberFromConsole)
+    } else if (numberFromConsole == secretNumber) {
         console.log('Adivinaste!')
         break
+    } else{
+      numberFromConsole = await userNumber()
     }
-} 
+  }
