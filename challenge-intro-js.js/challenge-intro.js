@@ -111,6 +111,24 @@ async function fecthSelectedAction(){
         const totalYoungAdults = students.filter(student => student.age >= 20 && student.age <= 25)
         console.log(totalYoungAdults)
       case '10':
+        const selectGender = availableGenders[Math.floor(Math.random() * availableGenders.length)];
+        let selectName = null;
+        if (selectGender === 'female') {
+            selectName = availableFemaleNames[Math.floor(Math.random() * availableFemaleNames.length)];
+        } else {
+            selectName = availableMaleNames[Math.floor(Math.random() * availableMaleNames.length)];
+        }
+        const min = 20
+        const max = 50
+        let selectAge = Math.floor(Math.random() * (max - min) + min);
+        students.push({
+            age: selectAge,
+            examScores: [],
+            gender: selectGender,
+            name: selectName
+        })
+        console.log(students)
+        break;
 
   }
 }
