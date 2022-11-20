@@ -50,9 +50,34 @@ function allYoungAdults(){
     console.log(totalYoungAdults)
 }
 
+const availableMaleNames = ['pepe', 'juan', 'victor', 'Leo', 'francisco', 'carlos'];
+const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
+const availableGenders = ['male', 'female'];
+
+function addRandomStudent(){
+    const selectGender = availableGenders[Math.floor(Math.random() * availableGenders.length)];
+    let selectName = null;
+    if (selectGender === 'female') {
+        selectName = availableFemaleNames[Math.floor(Math.random() * availableFemaleNames.length)];
+    } else {
+        selectName = availableMaleNames[Math.floor(Math.random() * availableMaleNames.length)];
+    }
+    const min = 20
+    const max = 50
+    let selectAge = Math.floor(Math.random() * (max - min) + min);
+    students.push({
+        age: selectAge,
+        examScores: [],
+        gender: selectGender,
+        name: selectName
+    })
+}
+
+addRandomStudent()
 
 
-module.exports = { printTable, fullStudentsLength, allStudentsName, deleteLastStudent };
+
+// module.exports = { printTable, fullStudentsLength, allStudentsName, deleteLastStudent };
 
 
 //   10- Añadir un alumno nuevo con los siguientes datos:
