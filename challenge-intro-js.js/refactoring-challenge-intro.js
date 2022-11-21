@@ -10,27 +10,13 @@ import {
   allGirlsBool,
   allYoungAdults,
   addRandomStudent,
+  youngerStudent,
+  averageAge,
+  averageGirlsAge,
+  addRandomScore,
+  sortAlphabetically
  } from './functions.js'
 
-
-// Listado Inicial
-const students = [{
-    age: 32,
-    examScores: [],
-    gender: 'male',
-    name: 'edu'
-  },
-  {
-    age: 29,
-    examScores: [],
-    gender: 'female',
-    name: 'silvia'
-  }]
-  
-  // Utilidades de Apoyo
-  const availableMaleNames = ['pepe', 'juan', 'victor', 'Leo', 'francisco', 'carlos'];
-  const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
-  const availableGenders = ['male', 'female'];
 
   // Ejercicio:
 
@@ -72,6 +58,11 @@ const actionRequirements = {
   '8': allGirlsBool,
   '9': allYoungAdults,
   '10': addRandomStudent,
+  '11': youngerStudent,
+  '12': averageAge,
+  '13': averageGirlsAge,
+  '14': addRandomScore,
+  '15': sortAlphabetically
 }
 
 // El usuario debe pulsar el número correspondiente a ese requisito para que se ejecute. 
@@ -97,16 +88,11 @@ const rl = readline.createInterface({
 async function fecthSelectedAction(){
   try{
     let action = await selectAction()
-    console.log(action)
-for (let key of Object.keys(actionRequirements)) {
-  console.log(key)
-  if ((action) == key){
-    actionRequirements[key]()
-  } else {
-    console.log('error')
-  }
-    
-}
+    for (let key of Object.keys(actionRequirements)) {
+      if ((action) == key){
+        actionRequirements[key]()
+      }
+    }
   }
   // review this to add the finish process action.
   catch(error){

@@ -1,7 +1,10 @@
+import { students, availableFemaleNames, availableGenders, availableMaleNames } from './students-data.js'
+
+
 // Functions:
 // 1: 'Mostrar en formato de tabla todos los alumnos.',
 export function printTable(){
-    console.log('table')
+    console.table(students)
   }
 
 // 2: Mostrar por consola la cantidad de alumnos que hay en clase.
@@ -24,10 +27,10 @@ export function deleteLastStudent() {
 
 // 5: Eliminar un alumno aleatoriamente de la clase.
 export function deleteRandomStudent() {
-    let randomStudent = students[Math.floor(Math.random() * students.length)]
+    students.splice(Math.floor(Math.random() * students.length), 1);
+    console.log(students);
+      
 }
-
-
 
 // 6: Mostrar por consola todos los datos de los alumnos que son chicas.
 export function eachGirlData() {
@@ -53,15 +56,7 @@ export function allYoungAdults(){
     console.log(totalYoungAdults)
 }
 
-const availableMaleNames = ['pepe', 'juan', 'victor', 'Leo', 'francisco', 'carlos'];
-const availableFemaleNames = ['cecilia', 'ana', 'luisa', 'silvia', 'isabel', 'virginia'];
-const availableGenders = ['male', 'female'];
-
-// 10: Añadir un alumno nuevo con los siguientes datos:
-//   nombre aleatorio.
-//   edad aleatoria entre 20 y 50 años.
-//   género aleatorio.
-//   listado de calificaciones vacío.
+// 10: Añadir un alumno nuevo con los siguientes datos: nombre aleatorio, edad aleatoria entre 20 y 50 años, género aleatorio, listado de calificaciones vacío.
 export function addRandomStudent(){
     const selectGender = availableGenders[Math.floor(Math.random() * availableGenders.length)];
     let selectName = null;
@@ -81,14 +76,43 @@ export function addRandomStudent(){
     })
 }
 
+// 11: Mostrar por consola el nombre de la persona más joven de la clase.
+export function youngerStudent() {
+    const younger = students.reduce(
+        (acc, ageN) =>
+          acc.age < ageN.age
+            ? acc
+            : ageN
+      )
+      console.log('The youngest student is: ', younger.name)
+}
 
+// 12: Mostrar por consola la edad media de todos los alumnos de la clase.
+export function averageAge() {
+    const average = students.reduce((a, b) => a + b.age, 0) / students.length
+    console.log(Math.round(average))
+}
 
+// 13: Mostrar por consola la edad media de las chicas de la clase.
+export function averageGirlsAge() {
+    const totalGirls = students.filter(student => student.gender === 'female');
+    const average = totalGirls.reduce((a, b) => a + b.age, 0) / totalGirls.length;
+    console.log(Math.round(average))
+}
 
+// 14: Añadir nueva nota a los alumnos. Por cada alumno de la clase, tendremos que calcular una nota de forma aleatoria(número entre 0 y 10) y añadirla a su listado de notas.
+export function addRandomScore() {
+    const min = 0
+    const max = 10
+    students.forEach(function(student) {
+        let score = Math.floor(Math.random() * (max - min) + min)
+        student.examScores.push([score])
+        console.log(student)
+    })
+}
 
+// 15: Ordenar el array de alumnos alfabéticamente según su nombre.
 
-//   11- Mostrar por consola el nombre de la persona más joven de la clase.
-//   ¡OJO!, si varias personas de la clase comparten la edad más baja, cualquiera de ellos es una respuesta válida.
-//   12- Mostrar por consola la edad media de todos los alumnos de la clase.
-//   13- Mostrar por consola la edad media de las chicas de la clase.
-//   14- Añadir nueva nota a los alumnos. Por cada alumno de la clase, tendremos que calcular una nota de forma aleatoria(número entre 0 y 10) y añadirla a su listado de notas.
-//   15- Ordenar el array de alumnos alfabéticamente según su nombre.
+export function sortAlphabetically() {
+    console.log(students.sort((a, b) => a.name.localeCompare(b.name)))
+}
