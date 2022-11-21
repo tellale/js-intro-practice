@@ -1,4 +1,4 @@
-import { students, availableFemaleNames, availableGenders, availableMaleNames } from './students-data.js'
+import { students, availableFemaleNames, availableGenders, availableMaleNames, toPrintRequirements } from './students-data.js'
 
 
 // Functions:
@@ -116,3 +116,36 @@ export function addRandomScore() {
 export function sortAlphabetically() {
     console.log(students.sort((a, b) => a.name.localeCompare(b.name)))
 }
+
+// 16: Mostrar por consola el alumno de la clase con las mejores notas.
+export function bestStudent() {
+    const listScores = []
+    students.forEach(function(student) {
+        let totalScore = student.examScores.reduce((a,b) => a + b, 0)
+        listScores.push(totalScore)
+    })
+    const indexBest = listScores.indexOf(
+        Math.max(...listScores));
+    console.log('The best student is: ', students[indexBest].name)
+}
+
+// 17: Mostrar por consola la nota media más alta de la clase y el nombre del alumno al que pertenece.
+function bestAverageScore() {
+    const listScores = []
+    students.forEach(function(student) {
+        let averageScore = student.examScores.reduce((a,b) => a + b, 0) / students.examScores.length
+        listScores.push(averageScore)
+    })
+    console.log(listScores)
+    const indexBest = listScores.indexOf(
+        Math.max(...listScores));
+    console.log('The best student with the best single score is: ', students[indexBest].name)
+    
+}
+bestAverageScore()
+
+
+
+
+
+// 18- Añadir un punto extra a cada nota existente de todos los alumnos. Recordad que la nota máxima posible es 10. Si los alumnos aún no tienen registrada ninguna nota, les pondremos un 10.
