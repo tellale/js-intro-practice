@@ -1,4 +1,5 @@
 import readline from 'readline';
+import {printTable} from './functions.js'
 
 // Listado Inicial
 const students = [{
@@ -78,7 +79,7 @@ async function fecthSelectedAction(){
     const action = await selectAction()
     switch(action) {
       case '1':
-        console.log('table')
+        printTable()
         break;
       case '2':
         console.log('The total number of students in your class is: ', students.length)
