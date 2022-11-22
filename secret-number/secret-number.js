@@ -8,10 +8,6 @@ function calculateRandomNumber(min, max) {
   return randomNumber;
 }
 
-const secretNumber = calculateRandomNumber(0, 100);
-
-console.log(secretNumber);
-
 // configuramos la utilidad de node para que los datos se pidan y se muestren por consola.
 const rl = readline.createInterface({
   input: process.stdin,
@@ -24,17 +20,14 @@ function getNumberFromConsole() {
       // nos permite hacer una pregunta por consola al usuario. Ojo que es un proceso asíncrono.
       rl.question('Introduce el número: ', (num) => {
           rl.pause();
+          num = (+num)
           if(isNaN(num)){
-            reject(new Error('Introduce nums'))
+            reject(new Error('Introduce nums')) // si el usuario mete una letra, debemos rechazar/rejectear la promesa.
           } else {
-            resolve(num)
-          }
-          // si el usuario mete un número, resolvemos la promesa con ese número.
-          
-          // si el usuario mete una letra, debemos rechazar/rejectear la promesa.
+            resolve(num) // si el usuario mete un número, resolvemos la promesa con ese número.
+          }  
       })
     })
-  
     return promise;
   }
 
@@ -49,14 +42,14 @@ async function userNumber(){
   }
 }
 
-
-
 //console.log(numberFromConsole)
 
 // Comprobar si el número es el número secreto:
 // Si lo es, tenemos ganador!
 // Si no lo es, damos la pista
-let numberFromConsole = await userNumber()
+const secretNumber = calculateRandomNumber(0, 100);
+
+let numberFromConsole = await userNumber();
 
 while (numberFromConsole !== secretNumber){
     if (numberFromConsole > secretNumber){
