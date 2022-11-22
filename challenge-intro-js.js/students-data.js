@@ -70,7 +70,10 @@ export const toPrintRequirements = {
     12: 'Mostrar por consola la edad media de todos los alumnos de la clase.',
     13: 'Mostrar por consola la edad media de las chicas de la clase.',
     14: 'Añadir nueva nota a los alumnos. Por cada alumno de la clase, tendremos que calcular una nota de forma aleatoria(número entre 0 y 10)',
-    15: 'Ordenar el array de alumnos alfabéticamente según su nombre.'
+    15: 'Ordenar el array de alumnos alfabéticamente según su nombre.',
+    16: 'Mostrar por consola el alumno de la clase con las mejores notas.',
+    17: 'Mostrar por consola la nota media más alta de la clase y el nombre del alumno al que pertenece.',
+    18: 'Añadir un punto extra a cada nota existente de todos los alumnos. Recordad que la nota máxima posible es 10. Si los alumnos aún no tienen registrada ninguna nota, les pondremos un 10.'
   }
 
 // Populating Students automatically

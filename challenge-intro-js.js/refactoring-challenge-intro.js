@@ -1,5 +1,8 @@
 import readline from 'readline';
+import { isInt16Array } from 'util/types';
 import {
+  printRequirements,
+  isInt,
   printTable,
   fullStudentsLength,
   allStudentsName,
@@ -19,7 +22,6 @@ import {
   bestAverageScore,
   addExtraPoint
 } from './functions.js'
-import { toPrintRequirements } from './students-data.js'
 
 
 const actionRequirements = {
@@ -43,12 +45,6 @@ const actionRequirements = {
   '18': addExtraPoint
 }
 
-// aparecerá el listado completo de requisitos.
-function printRequirements() {
-  for (const key of Object.keys(toPrintRequirements)) {
-    console.table(key + " : " + toPrintRequirements[key])
-  }
-}
 
 // configuramos la utilidad de node para que los datos se pidan y se muestren por consola.
 const rl = readline.createInterface({
@@ -60,30 +56,35 @@ function selectAction() {
   const promise = new Promise((resolve, reject) => {
     rl.question('Introduce el número: ', (num) => {
       rl.pause();
-      resolve(num)
-    })
-  })
+      if (isInt(num)) {
+        num = Number.parseInt(num);
+        if (num >= 1 && num <= 16) {
+          resolve(num)
+        }
+      } else {
+        reject('Fin del proceso')
+      }
+    });
+  });
   return promise
-}
+};
 // consumidor
 async function fecthSelectedAction() {
-  try {
-    let action = await selectAction()
+  let action;
+  do {
+    try{
+      printRequirements();
+      action = await selectAction();
+    } catch (error) {
+      console.log(error);
+      process.exit(0);
+    }
     for (let key of Object.keys(actionRequirements)) {
       if ((action) == key) {
-        actionRequirements[key]()
+        actionRequirements[key]();
       }
-    } return action
-  } catch (error) {
-    console.log(error)
-  }
+    }
+  } while (action !== 0);
 }
 
-printRequirements()
-let action = await fecthSelectedAction()
-while (action !== 0) {
-  if (action >= 1 && action <= 16) {
-    printRequirements()
-    action = await fecthSelectedAction()
-  }
-}
+fecthSelectedAction();

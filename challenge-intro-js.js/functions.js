@@ -2,6 +2,20 @@ import { students, availableFemaleNames, availableGenders, availableMaleNames, t
 
 
 // Functions:
+
+// Print requirements 
+export function printRequirements() {
+    for (const key of Object.keys(toPrintRequirements)) {
+      console.table(key + " : " + toPrintRequirements[key])
+    }
+  }
+
+// Check if it is int
+export function isInt(str){
+    // returns a boolean
+    return /^[0-9]+$/.test(str)
+  }
+
 // 1: 'Mostrar en formato de tabla todos los alumnos.',
 export function printTable(){
     console.table(students)
@@ -157,7 +171,7 @@ export function addExtraPoint() {
         } else if (student.examScores.length === 0){
             student.examScores.push(10)
         };
-    }); console.log(students);
+    });
 }
         
 
