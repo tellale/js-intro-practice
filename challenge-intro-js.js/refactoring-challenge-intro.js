@@ -15,7 +15,9 @@ import {
   averageGirlsAge,
   addRandomScore,
   sortAlphabetically,
-  bestStudent
+  bestStudent,
+  bestAverageScore,
+  addExtraPoint
 } from './functions.js'
 import { toPrintRequirements } from './students-data.js'
 
@@ -37,6 +39,8 @@ const actionRequirements = {
   '14': addRandomScore,
   '15': sortAlphabetically,
   '16': bestStudent,
+  '17': bestAverageScore,
+  '18': addExtraPoint
 }
 
 // aparecerá el listado completo de requisitos.
@@ -81,7 +85,5 @@ while (action !== 0) {
   if (action >= 1 && action <= 16) {
     printRequirements()
     action = await fecthSelectedAction()
-  } else {
-    break
   }
 }

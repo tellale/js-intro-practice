@@ -130,22 +130,34 @@ export function bestStudent() {
 }
 
 // 17: Mostrar por consola la nota media más alta de la clase y el nombre del alumno al que pertenece.
-function bestAverageScore() {
+export function bestAverageScore() {
     const listScores = []
     students.forEach(function(student) {
-        let averageScore = student.examScores.reduce((a,b) => a + b, 0) / students.examScores.length
+        let averageScore = student.examScores.reduce((a,b) => a + b, 0) / student.examScores.length
         listScores.push(averageScore)
     })
     console.log(listScores)
     const indexBest = listScores.indexOf(
         Math.max(...listScores));
-    console.log('The best student with the best single score is: ', students[indexBest].name)
-    
+    console.log('The best student with the best average score is: ', students[indexBest].name, 'with an average scare of: ', listScores[indexBest])
 }
-bestAverageScore()
 
+// 18: Añadir un punto extra a cada nota existente de todos los alumnos. Recordad que la nota máxima posible es 10. Si los alumnos aún no tienen registrada ninguna nota, les pondremos un 10.
+export function addExtraPoint() {
+    students.forEach(function(student) {
+        if (student.examScores.length !== 0) {
+            student.examScores = student.examScores.map(function(num) {
+                if (num < 10) {
+                    return num = num + 1
+                    }
+                else {
+                    return num = num
+                }
+                 });
+        } else if (student.examScores.length === 0){
+            student.examScores.push(10)
+        };
+    }); console.log(students);
+}
+        
 
-
-
-
-// 18- Añadir un punto extra a cada nota existente de todos los alumnos. Recordad que la nota máxima posible es 10. Si los alumnos aún no tienen registrada ninguna nota, les pondremos un 10.
