@@ -58,7 +58,7 @@ function selectAction() {
       rl.pause();
       if (isInt(num)) {
         num = Number.parseInt(num);
-        if (num >= 1 && num <= 16) {
+        if (num >= 1 && num <= 18) {
           resolve(num)
         }
       } else {

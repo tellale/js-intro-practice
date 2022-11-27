@@ -41,7 +41,7 @@ function selectAction() {
     rl.question('Introduce el número: ', (num) => {
       rl.pause();
       if (isNaN(num)) {
-        reject('error')
+        reject('Fin del proceso')
 
       } else {
         resolve(num)
@@ -109,6 +109,8 @@ async function fecthSelectedAction() {
         break;
       case '18':
         addExtraPoint();
+        break;
+      default:
         break;
     }
   }

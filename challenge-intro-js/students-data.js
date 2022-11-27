@@ -1,7 +1,7 @@
 // Listado Inicial
 export const students = [{
     age: 32,
-    examScores: [2, 3, 4, 10],
+    examScores: [10],
     gender: 'male',
     name: 'edu'
   },
@@ -13,7 +13,7 @@ export const students = [{
   },
   { 
     age: 22, 
-    examScores: [6, 7, 10], 
+    examScores: [6, 10], 
     gender: 'male', 
     name: 'carlos' 
   },

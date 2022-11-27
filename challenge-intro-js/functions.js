@@ -42,7 +42,6 @@ export function deleteLastStudent() {
 // 5: Eliminar un alumno aleatoriamente de la clase.
 export function deleteRandomStudent() {
     students.splice(Math.floor(Math.random() * students.length), 1);
-    console.log(students);
       
 }
 
@@ -67,7 +66,9 @@ export function allGirlsBool() {
 // 9: Mostrar por consola los nombres de los alumnos que tengan entre 20 y 25 años.
 export function allYoungAdults(){
     const totalYoungAdults = students.filter(student => student.age >= 20 && student.age <= 25)
-    console.log(totalYoungAdults)
+    totalYoungAdults.forEach(function(student) {
+        console.log(student.name)
+    })
 }
 
 // 10: Añadir un alumno nuevo con los siguientes datos: nombre aleatorio, edad aleatoria entre 20 y 50 años, género aleatorio, listado de calificaciones vacío.
@@ -104,14 +105,14 @@ export function youngerStudent() {
 // 12: Mostrar por consola la edad media de todos los alumnos de la clase.
 export function averageAge() {
     const average = students.reduce((a, b) => a + b.age, 0) / students.length
-    console.log(Math.round(average))
+    console.log('The average age of the students is: ', average)
 }
 
 // 13: Mostrar por consola la edad media de las chicas de la clase.
 export function averageGirlsAge() {
     const totalGirls = students.filter(student => student.gender === 'female');
     const average = totalGirls.reduce((a, b) => a + b.age, 0) / totalGirls.length;
-    console.log(Math.round(average))
+    console.log('The average age of the girls in the class is: ', average)
 }
 
 // 14: Añadir nueva nota a los alumnos. Por cada alumno de la clase, tendremos que calcular una nota de forma aleatoria(número entre 0 y 10) y añadirla a su listado de notas.
@@ -120,8 +121,7 @@ export function addRandomScore() {
     const max = 10
     students.forEach(function(student) {
         let score = Math.floor(Math.random() * (max - min) + min)
-        student.examScores.push([score])
-        console.log(student)
+        student.examScores.push(score)
     })
 }
 
@@ -148,11 +148,14 @@ export function bestAverageScore() {
     const listScores = []
     students.forEach(function(student) {
         let averageScore = student.examScores.reduce((a,b) => a + b, 0) / student.examScores.length
-        listScores.push(averageScore)
-    })
-    console.log(listScores)
-    const indexBest = listScores.indexOf(
-        Math.max(...listScores));
+        if (isNaN(averageScore) !== true) {
+            listScores.push(averageScore)
+        } else {
+            listScores.push(0)
+        }
+    });
+    const max = Math.max(...listScores)
+    const indexBest = listScores.indexOf(max);
     console.log('The best student with the best average score is: ', students[indexBest].name, 'with an average scare of: ', listScores[indexBest])
 }
 
